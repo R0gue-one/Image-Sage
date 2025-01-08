@@ -17,11 +17,11 @@
     </div>
 
     <script>
-        const unsplashAccessKey = 'Chj_ldnzjuWV1CGhCXzX-r6DDiTZcWgnp47zJVvKG-g'; // Replace with your Unsplash API key
+        const unsplashAccessKey = ''; // Replace with your Unsplash API key
 
         async function getRandomImage() {
             try {
-                const response = await fetch('http://localhost:3000/api/random-image');
+                const response = await fetch('/api/random-image');
                 const data = await response.json();
                 document.getElementById('random-image').src = data.urls.regular;
             } catch (error) {
