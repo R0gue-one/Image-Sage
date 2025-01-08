@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Sage</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Image Sage</h1>
+        <div class="image-container">
+            <img id="random-image" src="" alt="Random Image">
+        </div>
+        <div class="quote" id="random-quote"></div>
+        <button onclick="refreshContent()">Get New Image & Quote</button>
+    </div>
+
+    <script>
+        const unsplashAccessKey = 'Chj_ldnzjuWV1CGhCXzX-r6DDiTZcWgnp47zJVvKG-g'; // Replace with your Unsplash API key
+
+        async function getRandomImage() {
+            try {
+                const response = await fetch('http://localhost:3000/api/random-image');
+                const data = await response.json();
+                document.getElementById('random-image').src = data.urls.regular;
+            } catch (error) {
+                console.error('Error fetching image:', error);
+            }
+        }
+
+        async function getRandomQuote() {
+            try {
+                const response = await fetch('https://api.quotable.io/random');
+                const data = await response.json();
+                document.getElementById('random-quote').innerHTML = 
+                    `"${data.content}"<br><br>- ${data.author}`;
+            } catch (error) {
+                console.error('Error fetching quote:', error);
+            }
+        }
+
+        function refreshContent() {
+            getRandomImage();
+            getRandomQuote();
+        }
+
+        // Initial load
+        refreshContent();
+    </script>
+</body>
+</html>
