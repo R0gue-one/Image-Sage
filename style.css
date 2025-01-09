@@ -52,8 +52,45 @@ button {
     border-radius: 5px;
     cursor: pointer;
     margin: 50px;
+    /* Add transition for smooth effect */
+    transition: all 0.3s ease;
+    /* Add properties for press-and-hold behavior */
+    user-select: none;
+    position: relative;
 }
+
+/* Initial hover state */
 button:hover {
     color: rgb(255, 255, 255);
+    background-color: #967554;
+}
+
+/* Active (pressed) state */
+button:active {
     background-color: #83684a;
+    transform: scale(0.95);
+    /* Add transition timing for press effect */
+    transition: all 0.1s ease;
+}
+
+/* Add a CSS custom property for the progress */
+@property --progress {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: false;
+}
+
+button::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: var(--progress);
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: --progress 1s linear;
+}
+
+button:active::after {
+    --progress: 100%;
 }

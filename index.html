@@ -20,7 +20,7 @@
             </figure>
         </div>
         <div class="quote" id="random-quote"></div>
-        <button onclick="refreshContent()">Get New Image & Quote</button>
+        <button onmousedown="startHold()" onmouseup="cancelHold()" onmouseleave="cancelHold()">Get New Image & Quote</button>
     </div>
 
     <script>
@@ -61,6 +61,17 @@
             getRandomQuote();
         }
 
+        let holdTimer;
+
+        function startHold() {
+            holdTimer = setTimeout(() => {
+                refreshContent();
+            }, 1000); // Will trigger after 1 second of holding
+        }
+
+        function cancelHold() {
+            clearTimeout(holdTimer);
+        }
         // Initial load
         refreshContent();
     </script>
