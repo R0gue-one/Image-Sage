@@ -27,7 +27,9 @@
     <script>
         // Determine if we're in development or production
         const isLocal = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
+        const UTM = "?utm_source=ImageSage&utm_medium=referral"; //referal link to this Application
         let API_URL = '';
+
 
         if(isLocal){
             console.log("local!");
@@ -39,8 +41,8 @@
                 const response = await fetch(`${API_URL}/api/random-image`);
                 const data = await response.json();
                 document.getElementById('random-image').src = data.urls.regular;
-                document.getElementById('image-link').href = data.links.html;
-                document.getElementById('caption').innerHTML = `Photo by <a href="${data.user.links.html}">${data.user.id}</a> on <a href="https://unsplash.com/">unsplash</a>`
+                document.getElementById('image-link').href = data.links.html + UTM;
+                document.getElementById('caption').innerHTML = `Photo by <a href="${data.user.links.html}${UTM}">${data.user.id}</a> on <a href="https://unsplash.com/${UTM}">unsplash</a>`
             } catch (error) {
                 console.error('Error fetching image:', error);
             }
